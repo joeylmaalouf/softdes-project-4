@@ -1,0 +1,9 @@
+The main idea for our project is to make a series of games from which the user can choose. We will explore the topics of user interfacing and user experience. From these topics we will generate an engaging experience that is entertaining to the user. At a minimum, we will achieve two independent games, a stretch goal would be the inclusion of more games and cross-game integration.
+
+Our learning goals for this project are to learn about pygame and bitmapped graphics. 
+
+At the moment we plan to use pygame as our core library, and various 3rd party libraries for utility functions. We will more or less just use libraries as we find that they have functionality that we need.
+
+By the mid project check in we hope to have some form of playable games.
+
+One of the biggest dangers to us being successful on this project is the risk of not alloting enough time to the game development and so producing sub-par games. Another is to focus on quantity over quality, which we'd like to avoid.
