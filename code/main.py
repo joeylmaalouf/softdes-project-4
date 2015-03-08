@@ -5,10 +5,6 @@ import pygame
 from os.path import abspath, dirname
 from sys import argv, exit
 
-import dot
-import gol
-import smb
-
 
 def main(argv):
 	pygame.init()
@@ -33,10 +29,13 @@ def main(argv):
 			if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
 				(x, y) = pygame.mouse.get_pos()
 				if button1_rect.collidepoint(x, y):
+					import dot
 					dot.main(argv)
 				elif button2_rect.collidepoint(x, y):
+					import gol
 					gol.main(argv)
 				elif button3_rect.collidepoint(x, y):
+					import smb
 					smb.main(argv)
 		screen.blit(button, button1_rect)
 		screen.blit(button, button2_rect)

@@ -1,7 +1,9 @@
 """ Super Meat Boy
 	in Python.
 """
-from base import Camera, Entity, Level, cv2image_to_pygimage
+from base import Camera, Entity, cv2image_to_pygimage
+from levels import *
+
 import cv2
 from os.path import abspath, dirname
 import pygame
@@ -25,8 +27,11 @@ class MeatBoy(Entity):
 
 	def set_face(self, camera):
 		faces = []
-		while len(faces) < 1:
+		start_time = time.clock()
+		while len(faces) < 1 and time.clock()-start_time < 2:
 			faces = camera.get_face_coords()
+		if len(faces) < 1:
+			return
 		face_image = camera.get_face(camera.most_recent_frame, faces[0])
 		converted = cv2image_to_pygimage(face_image)
 		self.face = pygame.transform.scale(converted, self.size())
@@ -140,20 +145,8 @@ def main(argv):
 	camera = Camera(0)
 	font = pygame.font.SysFont("monospace", 16)
 	game_object = Game(size, camera, font)
-	level1 = Level()
 	player = MeatBoy(pos = level1.spawn)
 	player.set_face(game_object.camera)
-	level1.add_piece(128, 12, 8, 400)
-	level1.add_piece(64, 10, 180, 480)
-	level1.add_piece(80, 8, 300, 550)
-	level1.add_enemy(24, 24, 430, 8, 0, 1)
-	level1.add_enemy(24, 24, 430, 360, 0, 1)
-	level1.add_piece(80, 12, 500, 500)
-	level1.add_piece(96, 16, 640, 600)
-	level1.add_piece(64, 16, 800, 560)
-	level1.add_enemy(32, 32, 900, 8, 0, -1.5)
-	level1.add_enemy(32, 32, 900, 360, 0, -1.5)
-	level1.add_goal(64, 64, 1000, 500)
 
 	while 1:
 		game_object.update(player, level1)
