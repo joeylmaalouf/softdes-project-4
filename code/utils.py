@@ -2,6 +2,7 @@ import math
 import random
 import pygame
 
+
 class Vector(object):
 	""" The basic 2d vector object for directions and things
 	"""
@@ -39,6 +40,7 @@ class Vector(object):
 
 	def __str__(self):
 		return "vec("+str(self.x)+", "+str(self.y)+")"
+
 
 class Ball(object):
 	""" The basic ball object that the player interacts with
@@ -85,6 +87,7 @@ class Ball(object):
 	def __str__(self):
 		return "Ball at pos: " + str(self.pos) + ", with velocity: " + str(self.vel)
 
+
 class Player(object):
 	""" The player object for keeping track of the player
 	"""
@@ -100,6 +103,7 @@ class Player(object):
 
 	def draw(self, screen):
 		pygame.draw.circle(screen, self.color, (int(self.pos.x), int(self.pos.y)), self.radius)
+
 
 class Enemy(object):
 	""" Basic NPC Class
@@ -128,6 +132,7 @@ class Enemy(object):
 
 	def __str__(self):
 		return "Enemy at: " + str(self.pos)
+
 
 class DisplayObject(object):
 	""" For keeping track of stats about the screen
