@@ -33,7 +33,7 @@ class MeatBoy(Entity):
 		for x in range(self.w):
 			for y in range(self.h):
 				color = self.face.get_at([x, y])
-				color[2] = 255
+				color[2] = min(color[2]*2, 255)
 				self.face.set_at([x, y], color)
 
 
@@ -142,7 +142,7 @@ def main(argv):
 	game_object = Game(size, camera, font)
 	level1 = Level()
 	player = MeatBoy(pos = level1.spawn)
-	# player.set_face(game_object.camera)
+	player.set_face(game_object.camera)
 	level1.add_piece(128, 12, 8, 400)
 	level1.add_piece(64, 10, 180, 480)
 	level1.add_piece(80, 8, 300, 550)

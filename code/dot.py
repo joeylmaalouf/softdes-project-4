@@ -5,7 +5,7 @@ import time
 from utils import *
 from operator import add
 
-def main():
+def main(argv):
 	pygame.init()
 	myfont = pygame.font.Font(None, 30)
 	width = 1500
@@ -93,4 +93,4 @@ def main():
 
 
 if __name__ == "__main__":
-	main()
+	main(sys.argv)
