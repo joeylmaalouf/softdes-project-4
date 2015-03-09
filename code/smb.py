@@ -35,11 +35,6 @@ class MeatBoy(Entity):
 		face_image = camera.get_face(camera.most_recent_frame, faces[0])
 		converted = cv2image_to_pygimage(face_image)
 		self.face = pygame.transform.scale(converted, self.size())
-		for x in range(self.w):
-			for y in range(self.h):
-				color = self.face.get_at([x, y])
-				color[2] = min(color[2]*2, 255)
-				self.face.set_at([x, y], color)
 
 
 class Game(object):
@@ -145,12 +140,13 @@ def main(argv):
 	camera = Camera(0)
 	font = pygame.font.SysFont("monospace", 16)
 	game_object = Game(size, camera, font)
-	player = MeatBoy(pos = level1.spawn)
+	level = level2
+	player = MeatBoy(pos = level.spawn)
 	player.set_face(game_object.camera)
 
 	while 1:
-		game_object.update(player, level1)
-		game_object.draw(player, level1)
+		game_object.update(player, level)
+		game_object.draw(player, level)
 		pygame.display.flip()
 		time.sleep(float(1/60))  #  60 fps
 
