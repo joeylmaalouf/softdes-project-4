@@ -1,7 +1,7 @@
 """ Super Meat Boy
 	in Python.
 """
-from base import Camera, Entity, cv2image_to_pygimage
+from base import Camera, Entity
 from levels import *
 
 import cv2
@@ -25,17 +25,6 @@ class MeatBoy(Entity):
 		self.deaths = 0
 		self.won = False
 
-	def set_face(self, camera):
-		faces = []
-		start_time = time.clock()
-		while len(faces) < 1 and time.clock()-start_time < 2:
-			faces = camera.get_face_coords()
-		if len(faces) < 1:
-			return
-		face_image = camera.get_face(camera.most_recent_frame, faces[0])
-		converted = cv2image_to_pygimage(face_image)
-		self.face = pygame.transform.scale(converted, self.size())
-
 
 class Game(object):
 	""" The Game object, representing
@@ -50,12 +39,6 @@ class Game(object):
 		self.screen = pygame.display.set_mode(resolution)
 		self.folderpath = dirname(abspath(__file__))
 		pygame.display.set_caption("Super Meat Boy")
-
-
-	def close(self):
-		self.camera.capture.release()
-		cv2.destroyAllWindows()
-		sys.exit()
 
 
 	def update(self, player, level):
@@ -78,10 +61,10 @@ class Game(object):
 
 		for event in pygame.event.get():
 			if (event.type == pygame.QUIT):
-				self.close()
+				sys.exit()
 			if event.type == pygame.KEYDOWN:
 				if event.key == pygame.K_ESCAPE:
-					self.close()
+					sys.exit()
 				if player.grounded and event.key == pygame.K_w:
 					player.vy -= 4
 
@@ -143,7 +126,8 @@ def main(argv):
 	game_object = Game(size, camera, font)
 	level = level1
 	player = MeatBoy(pos = level.spawn)
-	player.set_face(game_object.camera)
+	player.face = game_object.camera.find_face(player.size())
+	game_object.camera.close()
 
 	while 1:
 		game_object.update(player, level)
@@ -151,7 +135,7 @@ def main(argv):
 		pygame.display.flip()
 		if retval == 1:
 			level = level2
-			player = MeatBoy(pos = level.spawn)
+			player, player.face = MeatBoy(pos = level.spawn), player.face
 		elif retval == 2:
 			sys.exit()
 		time.sleep(float(1/60))  #  60 fps

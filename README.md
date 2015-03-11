@@ -3,6 +3,8 @@ softdes-project-4
 
 A collaboration to test interactive programming via PyGame.
 
+Dependent on Pygame and OpenCV.
+
 ##Directory Structure:
 
 * The `/assets/` folder contains images used in the programs.

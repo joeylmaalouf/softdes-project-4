@@ -110,7 +110,7 @@ class Enemy(object):
 	""" Basic NPC Class
 	"""
 
-	def __init__(self, pos = Vector, radius = 5, color = (255, 0, 0), speed = 7):
+	def __init__(self, pos = Vector(), radius = 5, color = (255, 0, 0), speed = 7):
 		self.pos = pos
 		self.radius = radius
 		self.color = color

@@ -3,6 +3,7 @@
 import cv2
 import numpy as np
 import pygame
+import time
 
 
 class Box(object):
@@ -91,6 +92,21 @@ class Camera(object):
 
 	def get_face(self, frame, xywh):
 		return frame[xywh[1]:xywh[1]+xywh[3], xywh[0]:xywh[0]+xywh[2]]
+
+	def find_face(self, size):
+		faces = []
+		start_time = time.clock()
+		while len(faces) < 1 and time.clock()-start_time < 2:
+			faces = self.get_face_coords()
+		if len(faces) < 1:
+			return None
+		face_image = self.get_face(self.most_recent_frame, faces[0])
+		converted = cv2image_to_pygimage(face_image)
+		return pygame.transform.scale(converted, size)
+
+	def close(self):
+		self.capture.release()
+		cv2.destroyAllWindows()
 
 
 def cv2image_to_pygimage(image):
