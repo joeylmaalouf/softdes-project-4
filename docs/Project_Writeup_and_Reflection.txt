@@ -2,7 +2,14 @@ Project Overview:
 We made a multi-game arcade, with (currently) three fully-functional games. The first game we offer is Dot Shooter, an Asteroids-like game where the debris around you becomes your ammunition, used in fending off the endless, single-file horde of enemies. The second game is Conway's Game of Life,
 
 Results:
+We have three functional games and a simple GUI that lets the user choose which game they want to play. Dot Shooter has simple gameplay revolving around avoiding incoming red dots while firing back at them with ammo that is picked up in the environment. As the game progresses, more and more enemies arrive until the player is eventually overwhelmed, at which point they are shown how many enemies they defeated before dieing. The controls are simple, 4 buttons control lateral movement in a 2D plane, and a 5th button controls the picking up and firing of ammo. When the button is held, the player sucks up nearby balls, and when it is released a stream of balls is shot out corresponding to how many were picked up.
+The main focus of this game was visual effects, with the number of balls currently held being displayed faintly in the background such that it is easily readable but not intrusive to the game. The projectiles that the player shoots glow bright yellow and cool off to the normal dark green as they slow down, and enemies release an explosion of balls on death, introducing more ammo to the playing field.
 
+The Game of Life is an interactive simulation, where the user can modify parameters prior to and during the execution of the program. A collection of life forms are represented by squares in a grid, depending on how many blocks are adjacent to each other, it is calculated whether or not a life form will die in the next generation, and where new life forms will be created. Running off this basic set of laws, designs such as gliders emerge from random collections of blocks. The user can also use their mouse to create new life or destroy existing blocks in order to experiment with their own designs, or modify emergent ones.
+This game is more focused on emergent gameplay, where a simple set of rules leads to the emergence of classes of life forms and archetypes.
+
+The Super Joey Boy game is a simplified take on the popular platformer model, where a user navigates their avator through a course, avoiding obstacles with the goal of reaching the end of the stage. The controls are simple, two keys control movement to the left and right, a third jumps the avatar so that the player can traverse gaps and climb to higher levels. Various hazards also exist such as bottomless pits, and both static and mobile hurt zones that reset the progress of the player if the avatar touches them.
+This game is mainly focused on the mastering of technical skills and timing, as manipulating the uniquely non-physical movement of the avatar is key to completing some of the more difficult stages.
 Implementation:
 
 Reflection:
