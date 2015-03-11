@@ -1,7 +1,7 @@
 from base import Level
 
 
-level1 = Level()
+level1 = Level(1)
 level1.add_piece(128, 12, 8, 400)
 level1.add_piece(64, 10, 180, 480)
 level1.add_piece(80, 8, 300, 550)
@@ -14,7 +14,7 @@ level1.add_enemy(32, 32, 900, 8, 0, -1.5)
 level1.add_enemy(32, 32, 900, 360, 0, -1.5)
 level1.add_goal(64, 64, 1000, 500)
 
-level2 = Level()
+level2 = Level(2)
 level2.add_piece(1280, 4, 0, 716)
 level2.add_piece(64, 10, 300, 600)
 level2.add_piece(64, 10, 200, 490)

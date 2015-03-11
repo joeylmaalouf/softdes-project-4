@@ -56,7 +56,8 @@ class Level(object):
 		the current level's state.
 	"""
 
-	def __init__(self, spawn = (100, 100)):
+	def __init__(self, num, spawn = (100, 100)):
+		self.num = num
 		self.spawn = spawn
 		self.blocks = []
 		self.enemies = []

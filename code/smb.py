@@ -115,7 +115,7 @@ class Game(object):
 			self.screen.blit(win_label, (620, 320))
 			pygame.display.flip()
 			time.sleep(2)
-			sys.exit()
+			return level.num
 		else:
 			self.screen.fill((0, 0, 0))
 			try:
@@ -132,6 +132,7 @@ class Game(object):
 			self.screen.blit(control_label, (16, 16))
 			death_label = self.font.render(str(player.deaths)+(" Death" if player.deaths == 1 else " Deaths"), 1, (0, 255, 255))
 			self.screen.blit(death_label, (16, 684))
+			return 0
 
 
 def main(argv):
@@ -140,14 +141,19 @@ def main(argv):
 	camera = Camera(0)
 	font = pygame.font.SysFont("monospace", 16)
 	game_object = Game(size, camera, font)
-	level = level2
+	level = level1
 	player = MeatBoy(pos = level.spawn)
 	player.set_face(game_object.camera)
 
 	while 1:
 		game_object.update(player, level)
-		game_object.draw(player, level)
+		retval = game_object.draw(player, level)
 		pygame.display.flip()
+		if retval == 1:
+			level = level2
+			player = MeatBoy(pos = level.spawn)
+		elif retval == 2:
+			sys.exit()
 		time.sleep(float(1/60))  #  60 fps
 
 
