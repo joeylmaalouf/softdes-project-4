@@ -27,13 +27,13 @@ But these files can be safely ignored.
 ##Screenshots:
 
 Main Menu:
-[Main Menu](https://github.com/joeylmaalouf/softdes-project-4/media/main.png)
+[Main Menu](https://raw.githubusercontent.com/joeylmaalouf/softdes-project-4/master/media/main.png)
 
 Dot Shooter:
-[Dot Shooter](https://github.com/joeylmaalouf/softdes-project-4/media/dot.png)
+[Dot Shooter](https://raw.githubusercontent.com/joeylmaalouf/softdes-project-4/master/media/dot.png)
 
 Game of Life:
-[Game of Life](https://github.com/joeylmaalouf/softdes-project-4/media/gol.png)
+[Game of Life](https://raw.githubusercontent.com/joeylmaalouf/softdes-project-4/master/media/gol.png)
 
 Super Meat Boy:
-[Super Meat Boy](https://github.com/joeylmaalouf/softdes-project-4/media/smb.png)
+[Super Meat Boy](https://raw.githubusercontent.com/joeylmaalouf/softdes-project-4/master/media/smb.png)
