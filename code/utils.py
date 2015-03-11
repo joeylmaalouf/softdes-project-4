@@ -77,7 +77,7 @@ class Ball(object):
 
 	def draw(self, screen):
 		if not self.held:
-			self.color = (255 * self.vel.getMag()/100.0, 50 + 205 * self.vel.getMag()/100.0, 0)
+			self.color = (255 * self.vel.getMag()/100.0, 30 + 225 * self.vel.getMag()/100.0, 0)
 			pygame.draw.circle(screen, self.color, (int(self.pos.x), int(self.pos.y)), self.radius)
 
 	def fire(self, dir = Vector()):
@@ -92,7 +92,7 @@ class Player(object):
 	""" The player object for keeping track of the player
 	"""
 
-	def __init__(self, pos = Vector(), radius = 5, color = (150, 150, 255), suck_radius = 30, pickup_dist = 5, sucking = False, speed = 5):
+	def __init__(self, pos = Vector(), radius = 5, color = (150, 150, 255), suck_radius = 30, pickup_dist = 5, sucking = False, speed = 5, killDist = 10):
 		self.pos = pos
 		self.radius = radius
 		self.color = color
@@ -100,6 +100,7 @@ class Player(object):
 		self.pickup_dist = pickup_dist
 		self.sucking = sucking
 		self.speed = speed
+		self.killDist = killDist
 
 	def draw(self, screen):
 		pygame.draw.circle(screen, self.color, (int(self.pos.x), int(self.pos.y)), self.radius)

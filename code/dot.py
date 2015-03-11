@@ -7,7 +7,12 @@ from operator import add
 
 def main(argv):
 	pygame.init()
-	myfont = pygame.font.Font(None, 30)
+	gameRunning = True
+
+	loseFont = pygame.font.Font(None, 80)
+	ballCountFont = pygame.font.Font(None, 900)
+	scoreFont = pygame.font.Font(None, 22)
+
 	width = 1500
 	height = 800
 	size = width, height
@@ -17,18 +22,26 @@ def main(argv):
 
 	player = Player(pos = Vector(width/2, height/2), speed = 10, suck_radius = 60, pickup_dist = 10)
 
+	# Initialize game variables
 	enemies = []
-	enemies.append(Enemy(pos=Vector(523, 123)))
+	enemies.append(Enemy(pos=Vector(100, 100)))
 	balls = []
 	balls_to_be_added = []
 	ammo = []
+	score = 0
 
-	for x in range(0, width, 20):
-		for y in range(0, height, 20):
+	for x in range(0, width, 15):
+		for y in range(0, height, 15):
 			balls.append(Ball(pos = Vector(x, y), vel = Vector(0, 0)))
 
-	while 1:
+	while gameRunning:
 		screen.fill(background_color)
+		#Draw ball count first so it appears behind everything
+		ballCount_textSurface = ballCountFont.render(str(len(ammo)), True, (7,7,7)) #Print 'You lose' screen
+		ballCount_textRect = ballCount_textSurface.get_rect()
+		ballCount_textRect.center = ((width/2),(height/2))
+		screen.blit(ballCount_textSurface, ballCount_textRect)
+
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
 				sys.exit()
@@ -39,6 +52,14 @@ def main(argv):
 			sys.exit()
 		movement_dir = (Vector(-int(pressed_keys[pygame.K_a]), 0) + Vector(int(pressed_keys[pygame.K_d]), 0) + Vector(0, -int(pressed_keys[pygame.K_w])) + Vector(0, int(pressed_keys[pygame.K_s]))).norm()
 		player.pos = player.pos + (movement_dir * player.speed)	
+		if player.pos.x < 0:
+			player.pos.x = 0
+		elif player.pos.x > width:
+			player.pos.x = width
+		if player.pos.y < 0:
+			player.pos.y = 0
+		elif player.pos.y > height:
+			player.pos.y = height
 
 		#Process aiming
 		mouse_pos = Vector(pygame.mouse.get_pos()[0], pygame.mouse.get_pos()[1])
@@ -77,7 +98,10 @@ def main(argv):
 						while k < len(enemies):
 							if (enemies[k].pos - ball.pos).getMag() < 5:
 								balls_to_be_added.extend(enemies[k].kill())
+								score += 1 #Add one to the kill count
 								enemies.append(Enemy(pos = Vector(random.randint(100, 1400), random.randint(100, 700))))
+								if random.randint(1, 100)>90: #10% chance of spawning in another enemy!
+									enemies.append(Enemy(pos = Vector(random.randint(100, 1400), random.randint(100, 700))))
 								del(enemies[k])
 							else:
 								k += 1
@@ -86,10 +110,35 @@ def main(argv):
 				balls_to_be_added = []
 
 		for enemy in enemies:
-			enemy.move((player.pos - enemy.pos).norm())
+			direction = (player.pos - enemy.pos)
+			if direction.getMag() <= player.killDist:
+				gameRunning = False
+			enemy.move(direction.norm())
 			enemy.draw(screen)
 		player.draw(screen)
 		pygame.display.flip()
+
+	# Draw Game Over screen
+	s = pygame.Surface((width,height), pygame.SRCALPHA)
+	s.fill((0,0,0,180)) #Draw black transparent rectangle over screen
+	screen.blit(s, (0,0))
+
+	lose_textSurface = loseFont.render("You Lose", True, (255,255,255)) #Print 'You lose' screen
+	lose_textRect = lose_textSurface.get_rect()
+	lose_textRect.center = ((width/2),(height/2))
+	screen.blit(lose_textSurface, lose_textRect)
+
+	score_textSurface = scoreFont.render("You out-lived " + str(score) + " evil communist circles", True, (255,255,255)) #Print score
+	score_textRect = score_textSurface.get_rect()
+	score_textRect.center = ((width/2),(height/2) + lose_textRect.height)
+	screen.blit(score_textSurface, score_textRect)
+
+	pygame.display.flip()
+	time.sleep(.5)
+	while not any(x > 0 for x in pygame.key.get_pressed()):
+		pygame.event.get()
+		time.sleep(.001)
+
 
 
 if __name__ == "__main__":
