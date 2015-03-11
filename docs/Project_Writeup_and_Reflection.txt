@@ -1,0 +1,8 @@
+Project Overview:
+We made a multi-game arcade, with (currently) three fully-functional games. The first game we offer is Dot Shooter, an Asteroids-like game where the debris around you becomes your ammunition, used in fending off the endless, single-file horde of enemies. The second game is Conway's Game of Life,
+
+Results:
+
+Implementation:
+
+Reflection:
